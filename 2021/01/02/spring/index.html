@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      9.4k 字
+      9.6k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      130
+      131
        分钟
     </span>
   
@@ -431,8 +431,10 @@
 <p><strong>bean的作用域：</strong></p>
 <p><img src="https://cdn.jsdelivr.net/gh/Mister-Bugs/HexoImage/img/20210510141235.png" srcset="/img/loading.gif" lazyload alt="20160417164310654"></p>
 <p><strong>singleton</strong>：单例类型 (默认类型)</p>
+<p>在单例模式下，bean对象是同一个，通过同一个bean拿出来的对象是一样的，哈希地址也是一样的。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Mister-Bugs/HexoImage/img/20210510141255.bmp" srcset="/img/loading.gif" lazyload alt="singleton"></p>
 <p><strong>priototype</strong>：原型模式</p>
+<p>在原型模式下，每一次通过相同bean拿出的对象也是不一样的（会更废资源一些，但是能够解决部分的并发问题）</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Mister-Bugs/HexoImage/img/20210510141301.bmp" srcset="/img/loading.gif" lazyload alt="Prototype"></p>
 <blockquote>
 <p><strong>实例</strong></p>
@@ -815,7 +817,7 @@
 <li><ul>
 <li>基于接口的动态代理—-JDK动态代理</li>
 <li>基于类的动态代理–cglib</li>
-<li>这里使用JDK的原生代码来实现，其余的道理都是一样的！、</li>
+<li>JDK动态代理实现接口，Cglib动态代理继承思想。JDK动态代理（目标对象存在接口时）执行效率高于Ciglib。如果目标对象有接口实现，选择JDK代理，如果没有接口实现选择Cglib代理。</li>
 </ul>
 </li>
 </ul>
@@ -832,7 +834,7 @@
 <li><strong>InvocationHandler</strong>:调用处理程序</li>
 </ul>
 <p><img src="https://cdn.jsdelivr.net/gh/Mister-Bugs/HexoImage/img/20210510142510.png" srcset="/img/loading.gif" lazyload alt="image-20210423173020547"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">Object invoke​(Object proxy,<br> Method method,<br> Object[] args)<br>       <span class="hljs-keyword">throws</span> Throwable<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function">Object <span class="hljs-title">invoke</span> <span class="hljs-params">(Object proxy,</span></span><br><span class="hljs-function"><span class="hljs-params"> Method method,</span></span><br><span class="hljs-function"><span class="hljs-params"> Object[] args)</span></span><br><span class="hljs-function">       <span class="hljs-keyword">throws</span> Throwable</span><br></code></pre></td></tr></table></figure>
 
 <h5 id="简单实现-1"><a href="#简单实现-1" class="headerlink" title="简单实现"></a>简单实现</h5><ul>
 <li>抽象角色：接口</li>
