@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4.7k 字
+      5.4k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      65
+      72
        分钟
     </span>
   
@@ -441,7 +441,11 @@
 <li>服务端给客户端一个 信件，客户端下次访问服务端带上信件就可以了； cookie</li>
 <li>服务器登记你来过了，下次你来的时候我来匹配你； seesion（重点）</li>
 </ol>
-<h3 id="4-1-Cookie"><a href="#4-1-Cookie" class="headerlink" title="4.1  Cookie"></a>4.1  Cookie</h3><p><strong>cookie理论就两步</strong></p>
+<h3 id="4-1-Cookie"><a href="#4-1-Cookie" class="headerlink" title="4.1  Cookie"></a>4.1  Cookie</h3><p>在程序中，会话跟踪是很重要的事情。理论上，<strong>一个用户的所有请求操作都应该属于同一个会话</strong>，而另一个用户的所有请求操作则应该属于另一个会话，二者不能混淆。例如，用户A在超市购买的任何商品都应该放在A的购物车内，不论是用户A什么时间购买的，这都是属于同一个会话的，不能放入用户B或用户C的购物车内，这不属于同一个会话。</p>
+<p>　　而Web应用程序是使用HTTP协议传输数据的。<strong>HTTP协议是无状态的协议。一旦数据交换完毕，客户端与服务器端的连接就会关闭，再次交换数据需要建立新的连接。这就意味着服务器无法从连接上跟踪会话</strong>。即用户A购买了一件商品放入购物车内，当再次购买商品时服务器已经无法判断该购买行为是属于用户A的会话还是用户B的会话了。要跟踪该会话，必须引入一种机制。</p>
+<p>　　Cookie就是这样的一种机制。它可以弥补HTTP协议无状态的不足。在Session出现之前，基本上所有的网站都采用Cookie来跟踪会话。</p>
+<p>由于HTTP是一种无状态的协议，服务器单从网络连接上无从知道客户身份。怎么办呢？就<strong>给客户端们颁发一个通行证吧，每人一个，无论谁访问都必须携带自己通行证。这样服务器就能从通行证上确认客户身份了。这就是Cookie的工作原理</strong>。Cookie实际上是一小段的文本信息。客户端请求服务器，如果服务器需要记录该用户状态，就使用response向客户端浏览器颁发一个Cookie。客户端浏览器会把Cookie保存起来。当浏览器再请求该网站时，浏览器把请求的网址连同该Cookie一同提交给服务器。服务器检查该Cookie，以此来辨认用户状态。服务器还可以根据需要修改Cookie的内容。</p>
+<p><strong>cookie理论就两步</strong></p>
 <ul>
 <li><p>从请求中拿到cookie信息</p>
 </li>
@@ -469,6 +473,7 @@
 <li>Session把用户的数据写到用户独占Session中，服务器端保存  （保存重要的信息，减少服务器资源的浪费）</li>
 <li>Session对象由服务创建；</li>
 </ul>
+<p>Session对应的类为javax.servlet.http.HttpSession类。每个来访者对应一个Session对象，所有该客户的状态信息都保存在这个Session对象里。<strong>Session对象是在客户端第一次请求服务器的时候创建的</strong>。Session也是一种key-value的属性对，通过getAttribute(Stringkey)和setAttribute(String key，Objectvalue)方法读写客户状态信息。Servlet里通过request.getSession()方法获取该客户的Session，</p>
 <p>需要掌握的session方法;</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Mister-Bugs/HexoImage/img/20210510164713.png" srcset="/img/loading.gif" lazyload alt="image-20210421100924749"></p>
 <p>getServletContext()在后面会表示为application  </p>

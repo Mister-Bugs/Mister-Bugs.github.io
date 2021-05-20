@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      7.5k 字
+      8.1k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      107
+      114
        分钟
     </span>
   
@@ -576,7 +576,20 @@
 </ul>
 </li>
 </ul>
-<h3 id="4-7-映射器（Mappers）"><a href="#4-7-映射器（Mappers）" class="headerlink" title="4.7  映射器（Mappers）"></a>4.7  映射器（Mappers）</h3><p>MapperRegistry：注册绑定我们的Mapper文件；</p>
+<h3 id="4-7-映射器（Mappers）"><a href="#4-7-映射器（Mappers）" class="headerlink" title="4.7  映射器（Mappers）"></a>4.7  映射器（Mappers）</h3><p>mappers</p>
+<p>映射器 : 定义映射SQL语句文件</p>
+<p>既然 MyBatis 的行为其他元素已经配置完了，我们现在就要定义 SQL 映射语句了。但是首先我们需要告诉 MyBatis 到哪里去找到这些语句。Java 在自动查找这方面没有提供一个很好的方法，所以最佳的方式是告诉 MyBatis 到哪里去找映射文件。你可以使用相对于类路径的资源引用， 或完全限定资源定位符（包括 file:/// 的 URL），或类名和包名等。映射器是MyBatis中最核心的组件之一，在MyBatis 3之前，只支持xml映射器，即：所有的SQL语句都必须在xml文件中配置。而从MyBatis 3开始，还支持接口映射器，这种映射器方式允许以Java代码的方式注解定义SQL语句，非常简洁。</p>
+<p>注意：映射器只是一个接口，而不是一个实现类。初学者可能会产生一个很大的疑问：接口不是不能运行吗？的确，接口不能直接运行，但是MyBatis内部运用了动态代理技术，生成接口的实现类，从而完成接口的相关功能。只要明白 MyBatis 会为这个接口生成一个代理对象，代理对象会去处理映射器接口相关的逻辑即可。</p>
+<p><strong>接口绑定</strong></p>
+<p>接口绑定，就是在MyBatis中任意定义接口，然后把接口里面的方法和SQL语句绑定，我们直接调用接口方法就可以，这样比起原来了SqlSession提供的方法，可以有更加灵活的选择和设置。</p>
+<p>接口绑定有两种实现方式，一种是通过注解绑定，就是在接口的方法上面加上 @Select、@Update等注解，里面包含Sql语句来绑定；另外一种就是通过xml里面写SQL来绑定，在这种情况下，要指定xml映射文件里面的namespace必须为接口的全路径名。</p>
+<p>当Sql语句比较简单时候，用注解绑定，当SQL语句比较复杂时候，用xml绑定。一般情况下，用xml绑定的比较多。</p>
+<p>使用MyBatis的mapper接口调用时要注意的事项有：</p>
+<p>（1）Mapper接口方法名和mapper.xml中定义的每个sql的id相同；</p>
+<p>（2）Mapper接口方法的输入参数类型和mapper.xml中定义的每个sql 的parameterType的类型相同；</p>
+<p>（3）Mapper接口方法的输出参数类型和mapper.xml中定义的每个sql的resultType的类型相同；</p>
+<p>（4）Mapper.xml文件中的namespace即是mapper接口的类路径。</p>
+<p>MapperRegistry：注册绑定我们的Mapper文件；</p>
 <p>方式一： 【推荐使用】</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!--每一个Mapper.XML都需要在Mybatis核心配置文件中注册！--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">mappers</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">mapper</span> <span class="hljs-attr">resource</span>=<span class="hljs-string">&quot;com/ocean/dao/UserMapper.xml&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">mappers</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
